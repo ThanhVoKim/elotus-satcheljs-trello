@@ -1,0 +1,54 @@
+{
+	"name": "react",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"dependencies": {
+		"@headlessui/react": "^1.7.7",
+		"@types/node": "^16.18.3",
+		"@types/react": "^18.0.25",
+		"@types/react-dom": "^18.0.8",
+		"mobx": "^6.7.0",
+		"mobx-react": "^7.6.0",
+		"react": "^18.2.0",
+		"react-beautiful-dnd": "^13.1.1",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "5.0.1",
+		"sass": "^1.57.1",
+		"satcheljs": "^4.3.1",
+		"web-vitals": "^3.1.0"
+	},
+	"devDependencies": {
+		"@types/react-beautiful-dnd": "^13.1.3",
+		"@types/react-router-dom": "^5.3.3",
+		"@typescript-eslint/eslint-plugin": "^5.26.0",
+		"@typescript-eslint/parser": "^5.26.0",
+		"eslint": "^8.16.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-import-resolver-typescript": "^2.7.1",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-react": "^7.30.0",
+		"eslint-plugin-react-hooks": "^4.5.0",
+		"prettier": "2.6.2",
+		"typescript": "^4.9.4"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
+}

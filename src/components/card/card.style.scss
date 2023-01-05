@@ -1,0 +1,37 @@
+.card {
+	position: relative;
+
+	&:hover {
+		background-color: white;
+	}
+
+	&__content {
+		padding: 10px 12px;
+	}
+
+	&__title {
+		font-weight: 700;
+		font-size: 14px;
+		margin: 0 0 4px 0;
+		padding: 0 20px 0 0;
+	}
+
+	&__desc {
+		font-size: 13px;
+	}
+
+	&__button-icon-delete {
+		position: absolute;
+		top: 5px;
+		right: 6px;
+		color: var(--red-600);
+		display: none;
+		&:hover {
+			color: var(--red-700);
+		}
+	}
+
+	&:hover &__button-icon-delete {
+		display: block;
+	}
+}
