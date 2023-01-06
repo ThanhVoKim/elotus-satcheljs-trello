@@ -51,7 +51,7 @@ export class BoardItemCreate extends Component<
 						className="btn btn--green"
 						onClick={this.handleCreate}
 					>
-						Thêm
+						Lưu
 					</button>
 					<button
 						type="button"

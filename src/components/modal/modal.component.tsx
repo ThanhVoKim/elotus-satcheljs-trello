@@ -5,21 +5,21 @@ import './modal.style.scss';
 
 import { IModalProps } from '.';
 
-export const prefixClassModal = 'headless-modal';
+export const prefixClassDialog = 'headless-dialog';
 
 export const Modal: React.FC<IModalProps> = (props) => {
 	const { isOpenDialog, handleCloseDialog, children } = props;
 
-	return (
-		<div className={prefixClassModal}>
+	return isOpenDialog ? (
+		<div className={prefixClassDialog}>
 			<Dialog open={isOpenDialog} onClose={() => handleCloseDialog()}>
-				<div className={`${prefixClassModal}__overlay`} />
-				<div className={`${prefixClassModal}__container`}>
-					<div className={`${prefixClassModal}__container-entry`}>
+				<Dialog.Overlay className={`${prefixClassDialog}__overlay`} />
+				<div className={`${prefixClassDialog}__container`}>
+					<div className={`${prefixClassDialog}__container-entry`}>
 						<Dialog.Panel>{children}</Dialog.Panel>
 					</div>
 				</div>
 			</Dialog>
 		</div>
-	);
+	) : null;
 };

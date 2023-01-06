@@ -1,3 +1,5 @@
+import { editCardAction } from 'store-board/actions/edit-card';
+
 export interface ICard {
 	id?: string;
 	title?: string;
@@ -13,3 +15,5 @@ export interface IBoard {
 export interface IBoardStore {
 	boards: IBoard[];
 }
+
+export type TEditCardAction = ReturnType<typeof editCardAction>;

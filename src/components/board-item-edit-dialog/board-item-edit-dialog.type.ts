@@ -7,5 +7,5 @@ export interface IBoardItemEditDialogProps {
 }
 
 export interface IBoardEditFormState {
-	[key: string]: any;
+	title: string;
 }

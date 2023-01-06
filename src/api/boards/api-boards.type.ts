@@ -6,13 +6,20 @@ export interface IDeleteBoardData {
 	id: string;
 }
 
-export interface IUpdateBoardData {
+export interface IEditBoardData {
 	id: string;
 	title: string;
 }
 
 export interface ICreateCardData {
 	boardId: string;
+	title: string;
+	content: string;
+}
+
+export interface IEditCardData {
+	boardId: string;
+	id: string;
 	title: string;
 	content: string;
 }

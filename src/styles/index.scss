@@ -32,6 +32,14 @@ textarea {
 	resize: none;
 }
 
+input,
+textarea,
+select {
+	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+}
+
 .btn {
 	display: inline-block;
 	border-radius: 4px;

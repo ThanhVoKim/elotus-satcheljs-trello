@@ -34,6 +34,10 @@
 		}
 	}
 
+	&__list-col {
+		background-color: var(--gray-200);
+	}
+
 	&__button-icon-add {
 		position: absolute;
 		left: 10px;

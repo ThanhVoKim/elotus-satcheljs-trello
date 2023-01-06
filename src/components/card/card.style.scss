@@ -20,18 +20,32 @@
 		font-size: 13px;
 	}
 
-	&__button-icon-delete {
+	&__action {
 		position: absolute;
 		top: 5px;
 		right: 6px;
-		color: var(--red-600);
 		display: none;
-		&:hover {
-			color: var(--red-700);
-		}
+		display: flex;
+		align-items: center;
+		flex-flow: row nowrap;
+		gap: 5px;
 	}
 
-	&:hover &__button-icon-delete {
-		display: block;
+	&:hover &__action {
+		display: flex;
+	}
+
+	&__button-icon {
+		border-radius: 4px;
+		&:hover {
+			background-color: var(--gray-50);
+		}
+
+		&.delete:hover {
+			color: var(--red-600);
+		}
+		&.edit:hover {
+			color: var(--blue-600);
+		}
 	}
 }

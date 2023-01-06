@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import './board-item-edit-dialog.style.scss';
 
 import { IBoardEditFormState, IBoardItemEditDialogProps } from './';
+import { prefixClassDialog } from 'components/modal';
 
 export const prefixClassBoardEdit = 'board-edit-dialog';
 
@@ -12,24 +13,25 @@ export const BoardItemEditDialog: React.FC<IBoardItemEditDialogProps> = (
 ) => {
 	const { board, handleCloseDialog, handleUpdateBoard } = props;
 	const [editForm, setEditForm] = useState<IBoardEditFormState>({
-		title: board.title,
+		title: board.title || '',
 	});
 
 	const onUpdateBoard = () => {
-		const { title = '' } = editForm;
+		const { title } = editForm;
 		if (!title) return;
 		handleUpdateBoard(title);
 	};
 
 	return (
 		<div className={`${prefixClassBoardEdit}`}>
-			<Dialog.Title className={`${prefixClassBoardEdit}__title`}>
-				Chỉnh sửa danh mục
+			<Dialog.Title className={`${prefixClassDialog}__title`}>
+				Chỉnh sửa danh sách
 			</Dialog.Title>
-			<Dialog.Description className={`${prefixClassBoardEdit}__description`}>
+			<div className={`${prefixClassDialog}__body`}>
 				<input
 					type="text"
-					className={`${prefixClassBoardEdit}__input`}
+					className={`${prefixClassDialog}__input`}
+					placeholder="Tên danh sách"
 					value={editForm.title}
 					onChange={(e) => {
 						setEditForm((prevState) => ({
@@ -38,8 +40,8 @@ export const BoardItemEditDialog: React.FC<IBoardItemEditDialogProps> = (
 						}));
 					}}
 				/>
-			</Dialog.Description>
-			<div className={`${prefixClassBoardEdit}__action`}>
+			</div>
+			<div className={`${prefixClassDialog}__action`}>
 				<button
 					className="btn btn--primary"
 					onClick={() => {

@@ -8,7 +8,8 @@ import {
 	IDeleteCardData,
 	IMoveCardData,
 	IReorderCardData,
-	IUpdateBoardData,
+	IEditBoardData,
+	IEditCardData,
 } from './';
 
 export const getBoardsApi = () => {
@@ -43,13 +44,13 @@ export const postCreateBoardsApi = (data: ICreateBoardData) => {
 	});
 };
 
-export const putUpdateBoardsApi = (data: IUpdateBoardData) => {
+export const putEditBoardsApi = (data: IEditBoardData) => {
 	return new Promise<IBoard[]>((resolve, reject) => {
 		try {
 			const { id, title } = data;
 			const newBoards = [...getBoardsSelector()];
 			const selectedIndex = newBoards.findIndex((board) => board.id === id);
-			if (selectedIndex < 0) return;
+			if (selectedIndex < 0) reject('No board found with id');
 
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard.title = title;
@@ -90,7 +91,7 @@ export const postCreateCardApi = (data: ICreateCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) return;
+			if (selectedIndex < 0) reject('No board found');
 
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard?.cards?.push({
@@ -98,6 +99,33 @@ export const postCreateCardApi = (data: ICreateCardData) => {
 				title,
 				content,
 			});
+			window.localStorage.setItem(
+				BOARDS_LOCAL_STORAGE,
+				JSON.stringify(newBoards),
+			);
+			resolve(newBoards);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
+export const putEditCardsApi = (data: IEditCardData) => {
+	return new Promise<IBoard[]>((resolve, reject) => {
+		try {
+			const { boardId, id, title, content } = data;
+			const newBoards = [...getBoardsSelector()];
+			const selectedIndex = newBoards.findIndex(
+				(board) => board.id === boardId,
+			);
+			if (selectedIndex < 0) reject('No board found');
+
+			const selectedBoard = newBoards[selectedIndex];
+			selectedBoard.cards =
+				selectedBoard.cards?.map((card) =>
+					card.id === id ? { ...card, title, content } : card,
+				) || [];
+
 			window.localStorage.setItem(
 				BOARDS_LOCAL_STORAGE,
 				JSON.stringify(newBoards),
@@ -117,7 +145,7 @@ export const deleteCardApi = (data: IDeleteCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) return;
+			if (selectedIndex < 0) reject('No board found');
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard.cards = selectedBoard.cards?.filter(
 				(card) => card.id !== cardId,
@@ -148,7 +176,10 @@ export const putMoveCardApi = (data: IMoveCardData) => {
 					destinationCards = board.cards;
 				}
 			}
-			if (!sourceCards || !destinationCards) return;
+			if (!sourceCards || !destinationCards) {
+				reject('No source card or destination card found');
+				return;
+			}
 			const [changeItem] = sourceCards.splice(startIndex, 1);
 			destinationCards.splice(endIndex, 0, changeItem);
 			window.localStorage.setItem(
@@ -170,7 +201,7 @@ export const putReorderCardApi = (data: IReorderCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) return;
+			if (selectedIndex < 0) reject('No board found');
 			const selectedBoard = newBoards[selectedIndex];
 			const { cards = [] } = selectedBoard;
 			const [changeItem] = cards.splice(startIndex, 1);
