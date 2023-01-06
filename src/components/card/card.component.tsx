@@ -12,7 +12,7 @@ export const prefixClassCard = 'card';
 
 export const Card: React.FC<ICardProps> = (props) => {
 	const { card, boardId = '' } = props;
-	const { id = '' } = card;
+	const { id = '', title = '', content = '' } = card;
 
 	const [isOpenDialog, setIsOpenDialog] = useState(false);
 
@@ -33,8 +33,12 @@ export const Card: React.FC<ICardProps> = (props) => {
 		<>
 			<div className={prefixClassCard}>
 				<div className={`${prefixClassCard}__content`}>
-					<div className={`${prefixClassCard}__title`}>{card?.title}</div>
-					<div className={`${prefixClassCard}__desc`}>{card?.content}</div>
+					<div className={`${prefixClassCard}__title`}>{title}</div>
+					<div className={`${prefixClassCard}__desc`}>
+						{content?.length > 100
+							? `${content?.substring(0, 100)}...`
+							: content}
+					</div>
 				</div>
 				<div className={`${prefixClassCard}__action`}>
 					<button
