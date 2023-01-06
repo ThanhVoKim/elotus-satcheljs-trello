@@ -1,18 +1,20 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
-import './board-item.style.scss';
 import { AddCircleOutlineIcon } from 'svg';
 import { IBoardItemProps } from './board-item.type';
 import { Card } from 'components/card';
 import { CardCreate } from 'components/card-create';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { BoardItemButtonMore } from 'components/board-item-button-more';
 import { DROPPABLE_CARDS_TYPE } from 'constant';
+
+import './board-item.style.scss';
 
 export const prefixClassBoardItem = 'board-item';
 
 export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 	const { board, dragHandleProps } = props;
+	const { cards = [], title, id } = board;
 
 	const [showCreateBoard, setShowCreateBoard] = useState(false);
 
@@ -21,11 +23,12 @@ export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 	};
 
 	return (
-		<div className={prefixClassBoardItem}>
-			<div
-				className={`${prefixClassBoardItem}__title`}
-				//{...dragHandleProps}
-			>
+		<div
+			className={`${prefixClassBoardItem} ${
+				cards.length > 0 ? 'has-cards' : 'no-cards'
+			}`}
+		>
+			<div className={`${prefixClassBoardItem}__title`} {...dragHandleProps}>
 				<button
 					type="button"
 					className={`${prefixClassBoardItem}__button-icon-add`}
@@ -34,9 +37,7 @@ export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 					<AddCircleOutlineIcon width={20} />
 				</button>
 
-				<div className={`${prefixClassBoardItem}__title-content`}>
-					{board.title}
-				</div>
+				<div className={`${prefixClassBoardItem}__title-content`}>{title}</div>
 
 				<div className={`${prefixClassBoardItem}__button-more`}>
 					<BoardItemButtonMore board={board} />
@@ -44,13 +45,13 @@ export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 			</div>
 			{showCreateBoard && (
 				<CardCreate
-					boardId={board.id}
+					boardId={id}
 					onClose={() => {
 						setShowCreateBoard(false);
 					}}
 				/>
 			)}
-			<Droppable droppableId={`${board.id}`} type={DROPPABLE_CARDS_TYPE}>
+			<Droppable droppableId={`${id}`} type={DROPPABLE_CARDS_TYPE}>
 				{(provided, snapshot) => (
 					<div
 						ref={provided.innerRef}
@@ -59,7 +60,7 @@ export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 							snapshot.isDraggingOver ? 'draggingOver' : ''
 						}`}
 					>
-						{board?.cards?.map((card, index) => (
+						{cards.map((card, index) => (
 							<Draggable key={card.id} draggableId={card.id!} index={index}>
 								{(provided, snapshot) => (
 									<div
@@ -71,7 +72,7 @@ export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 										}`}
 										style={{ ...provided.draggableProps.style }}
 									>
-										<Card card={card} boardId={board.id} />
+										<Card card={card} boardId={id} />
 									</div>
 								)}
 							</Draggable>

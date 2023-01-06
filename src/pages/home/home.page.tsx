@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { observer } from 'mobx-react';
 import {
 	DragDropContext,
@@ -9,7 +9,6 @@ import {
 
 import './home.style.scss';
 
-import { getBoardStore } from 'store-board/store';
 import { BoardItem } from 'components/board-item';
 
 import {
@@ -80,7 +79,6 @@ export class Home extends Component {
 												<div
 													ref={provided.innerRef}
 													{...provided.draggableProps}
-													{...provided.dragHandleProps}
 													className={`${prefixClassBoard}__list-col ${
 														snapshot.isDragging ? 'dragging' : ''
 													}`}

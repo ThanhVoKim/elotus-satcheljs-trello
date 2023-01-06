@@ -7,6 +7,21 @@
 	width: var(--board-width);
 	font-size: 14px;
 
+	&.no-cards {
+		background-color: transparent;
+		box-shadow: none;
+	}
+
+	&.no-cards &__title {
+		box-shadow: 1px 1px 5px 2px rgba(black, 0.1);
+		background-color: var(--gray-200);
+		border-radius: 4px;
+	}
+
+	&.no-cards &__list {
+		min-height: 50px;
+	}
+
 	&__title {
 		padding: 10px 12px;
 		font-weight: 700;
@@ -24,6 +39,8 @@
 	&__list {
 		display: flex;
 		flex-flow: column nowrap;
+		border-radius: 4px;
+
 		&.draggingOver {
 			background-color: var(--gray-400);
 		}
