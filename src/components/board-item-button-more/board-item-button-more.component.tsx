@@ -46,9 +46,11 @@ export const BoardItemButtonMore: React.FC<IBoardItemButtonMoreProps> = (
 									active ? 'active' : ''
 								}`}
 								type="button"
-								onClick={handleDeleteBoard}
+								onClick={() => {
+									setIsOpenDialog(true);
+								}}
 							>
-								Xóa danh sách
+								Chỉnh sửa danh sách
 							</button>
 						)}
 					</Menu.Item>
@@ -59,11 +61,9 @@ export const BoardItemButtonMore: React.FC<IBoardItemButtonMoreProps> = (
 									active ? 'active' : ''
 								}`}
 								type="button"
-								onClick={() => {
-									setIsOpenDialog(true);
-								}}
+								onClick={handleDeleteBoard}
 							>
-								Chỉnh sửa danh sách
+								Xóa danh sách
 							</button>
 						)}
 					</Menu.Item>

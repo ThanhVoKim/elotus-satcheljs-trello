@@ -24,18 +24,21 @@
 	&__list {
 		display: flex;
 		flex-flow: column nowrap;
-
-		.card {
-			border: 1px solid rgba(#000, 0.1);
-		}
-
-		.dragging .card {
-			background-color: #fff;
+		&.draggingOver {
+			background-color: var(--gray-400);
 		}
 	}
 
 	&__list-col {
 		background-color: var(--gray-200);
+		border-radius: 4px;
+		.card {
+			border: 1px solid rgba(#000, 0.1);
+		}
+
+		&.dragging .card {
+			background-color: #fff;
+		}
 	}
 
 	&__button-icon-add {
@@ -58,7 +61,9 @@
 		transform: translateY(-50%);
 		z-index: 1;
 		&:hover {
-			color: var(--blue-700);
+			svg {
+				color: var(--blue-700);
+			}
 		}
 	}
 }

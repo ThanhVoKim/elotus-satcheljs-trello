@@ -10,6 +10,7 @@ import {
 	IReorderCardData,
 	IEditBoardData,
 	IEditCardData,
+	IReorderBoardData,
 } from './';
 
 export const getBoardsApi = () => {
@@ -72,6 +73,24 @@ export const deleteBoardsApi = (data: IDeleteBoardData) => {
 			const newBoards = [...getBoardsSelector()].filter(
 				(board) => board.id !== boardId,
 			);
+			window.localStorage.setItem(
+				BOARDS_LOCAL_STORAGE,
+				JSON.stringify(newBoards),
+			);
+			resolve(newBoards);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
+export const putReorderBoardsApi = (data: IReorderBoardData) => {
+	return new Promise<IBoard[]>((resolve, reject) => {
+		try {
+			const { startIndex, endIndex } = data;
+			const newBoards = [...getBoardsSelector()];
+			const [changeItem] = newBoards.splice(startIndex, 1);
+			newBoards.splice(endIndex, 0, changeItem);
 			window.localStorage.setItem(
 				BOARDS_LOCAL_STORAGE,
 				JSON.stringify(newBoards),

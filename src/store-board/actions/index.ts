@@ -5,4 +5,5 @@ export * from './add-card';
 export * from './edit-card';
 export * from './delete-card';
 export * from './move-card';
+export * from './reorder-board';
 export * from './reorder-card';

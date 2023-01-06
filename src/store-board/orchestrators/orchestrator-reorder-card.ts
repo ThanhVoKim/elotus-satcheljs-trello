@@ -1,10 +1,10 @@
 import { orchestrator } from 'satcheljs';
 import { saveBoardsAction } from 'store-board/mutator-actions';
 import { getBoardsSelector } from 'store-board/selectors';
-import { reorderCardAction } from 'store-board/actions';
+import { reorderBoardAction } from 'store-board/actions';
 
 export const reorderCardOrchestrator = orchestrator(
-	reorderCardAction,
+	reorderBoardAction,
 	(actionMessage) => {
 		// const { boardId, startIndex, endIndex } = actionMessage;
 		// const newBoards = [...getBoardsSelector()];

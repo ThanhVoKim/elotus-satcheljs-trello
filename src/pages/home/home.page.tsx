@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import {
+	DragDropContext,
+	Draggable,
+	Droppable,
+	DropResult,
+} from 'react-beautiful-dnd';
 
 import './home.style.scss';
 
 import { getBoardStore } from 'store-board/store';
 import { BoardItem } from 'components/board-item';
 
-import { reorderCardAction, moveCardAction } from 'store-board/actions';
+import {
+	reorderBoardAction,
+	moveCardAction,
+	reorderCardAction,
+} from 'store-board/actions';
 import { dispatch } from 'satcheljs';
 import { getBoardsAction } from 'store-board/actions/get-boards';
 import { BoardItemCreate } from 'components/board-create';
+import { getBoardsSelector } from 'store-board/selectors';
+import { DROPPABLE_BOARDS_TYPE } from 'constant';
 
 export const prefixClassBoard = 'board';
 
@@ -21,50 +32,76 @@ export class Home extends Component {
 	}
 
 	onDragEnd = (result: DropResult) => {
-		const { source, destination } = result;
-
+		const { source, destination, type } = result;
 		// dropped outside the list
 		if (!destination) {
 			return;
 		}
 
-		const sInd = source.droppableId;
-		const dInd = destination.droppableId;
-		if (sInd === dInd) {
-			dispatch(reorderCardAction(sInd, source.index, destination.index));
+		if (type === DROPPABLE_BOARDS_TYPE) {
+			dispatch(reorderBoardAction(source.index, destination.index));
 		} else {
-			dispatch(moveCardAction(sInd, dInd, source.index, destination.index));
+			const sInd = source.droppableId;
+			const dInd = destination.droppableId;
+			if (sInd === dInd) {
+				dispatch(reorderCardAction(sInd, source.index, destination.index));
+			} else {
+				dispatch(moveCardAction(sInd, dInd, source.index, destination.index));
+			}
 		}
 	};
 
 	render() {
-		const { boards } = getBoardStore();
+		const boards = getBoardsSelector();
 		return (
 			<div className={prefixClassBoard}>
 				<DragDropContext onDragEnd={this.onDragEnd}>
-					<div className={`${prefixClassBoard}__list`}>
-						{boards.map((board) => {
-							return (
-								<Droppable key={board.id} droppableId={board.id!}>
-									{(provided, snapshot) => (
-										<div
-											ref={provided.innerRef}
-											{...provided.droppableProps}
-											className={`${prefixClassBoard}__list-col ${
-												snapshot.isDraggingOver ? 'draggingOver' : ''
-											}`}
+					<Droppable
+						droppableId="droppable-boards"
+						direction="horizontal"
+						type={DROPPABLE_BOARDS_TYPE}
+					>
+						{(provided, snapshot) => (
+							<div
+								ref={provided.innerRef}
+								{...provided.droppableProps}
+								className={`${prefixClassBoard}__list ${
+									snapshot.isDraggingOver ? 'dragging-over' : ''
+								}`}
+							>
+								{boards.map((board, index) => {
+									return (
+										<Draggable
+											key={board.id}
+											draggableId={board.id!}
+											index={index}
 										>
-											<BoardItem board={board} />
-											{provided.placeholder}
-										</div>
-									)}
-								</Droppable>
-							);
-						})}
-						<div className={`${prefixClassBoard}__list-col`}>
-							<BoardItemCreate />
-						</div>
-					</div>
+											{(provided, snapshot) => (
+												<div
+													ref={provided.innerRef}
+													{...provided.draggableProps}
+													{...provided.dragHandleProps}
+													className={`${prefixClassBoard}__list-col ${
+														snapshot.isDragging ? 'dragging' : ''
+													}`}
+													style={provided.draggableProps.style}
+												>
+													<BoardItem
+														board={board}
+														dragHandleProps={provided.dragHandleProps}
+													/>
+												</div>
+											)}
+										</Draggable>
+									);
+								})}
+								{provided.placeholder}
+								<div className={`${prefixClassBoard}__list-col`}>
+									<BoardItemCreate />
+								</div>
+							</div>
+						)}
+					</Droppable>
 				</DragDropContext>
 			</div>
 		);
