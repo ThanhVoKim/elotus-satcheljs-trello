@@ -28,29 +28,33 @@ export const BoardItem: React.FC<IBoardItemProps> = (props) => {
 				cards.length > 0 ? 'has-cards' : 'no-cards'
 			}`}
 		>
-			<div className={`${prefixClassBoardItem}__title`} {...dragHandleProps}>
-				<button
-					type="button"
-					className={`${prefixClassBoardItem}__button-icon-add`}
-					onClick={handleShowCreate}
-				>
-					<AddCircleOutlineIcon width={20} />
-				</button>
+			<div className={`${prefixClassBoardItem}__header`}>
+				<div className={`${prefixClassBoardItem}__title`} {...dragHandleProps}>
+					<button
+						type="button"
+						className={`${prefixClassBoardItem}__button-icon-add`}
+						onClick={handleShowCreate}
+					>
+						<AddCircleOutlineIcon width={20} />
+					</button>
 
-				<div className={`${prefixClassBoardItem}__title-content`}>{title}</div>
+					<div className={`${prefixClassBoardItem}__title-content`}>
+						{title}
+					</div>
 
-				<div className={`${prefixClassBoardItem}__button-more`}>
-					<BoardItemButtonMore board={board} />
+					<div className={`${prefixClassBoardItem}__button-more`}>
+						<BoardItemButtonMore board={board} />
+					</div>
 				</div>
+				{showCreateBoard && (
+					<CardCreate
+						boardId={id}
+						onClose={() => {
+							setShowCreateBoard(false);
+						}}
+					/>
+				)}
 			</div>
-			{showCreateBoard && (
-				<CardCreate
-					boardId={id}
-					onClose={() => {
-						setShowCreateBoard(false);
-					}}
-				/>
-			)}
 			<Droppable droppableId={`${id}`} type={DROPPABLE_CARDS_TYPE}>
 				{(provided, snapshot) => (
 					<div

@@ -51,7 +51,7 @@ export const putEditBoardsApi = (data: IEditBoardData) => {
 			const { id, title } = data;
 			const newBoards = [...getBoardsSelector()];
 			const selectedIndex = newBoards.findIndex((board) => board.id === id);
-			if (selectedIndex < 0) reject('No board found with id');
+			if (selectedIndex < 0) reject(new Error('No board found with id'));
 
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard.title = title;
@@ -110,8 +110,7 @@ export const postCreateCardApi = (data: ICreateCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) reject('No board found');
-
+			if (selectedIndex < 0) reject(new Error('No board found'));
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard?.cards?.push({
 				id: String(new Date().getTime()),
@@ -137,7 +136,7 @@ export const putEditCardsApi = (data: IEditCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) reject('No board found');
+			if (selectedIndex < 0) reject(new Error('No board found'));
 
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard.cards =
@@ -164,7 +163,7 @@ export const deleteCardApi = (data: IDeleteCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) reject('No board found');
+			if (selectedIndex < 0) reject(new Error('No board found'));
 			const selectedBoard = newBoards[selectedIndex];
 			selectedBoard.cards = selectedBoard.cards?.filter(
 				(card) => card.id !== cardId,
@@ -196,7 +195,7 @@ export const putMoveCardApi = (data: IMoveCardData) => {
 				}
 			}
 			if (!sourceCards || !destinationCards) {
-				reject('No source card or destination card found');
+				reject(new Error('No source card or destination card found'));
 				return;
 			}
 			const [changeItem] = sourceCards.splice(startIndex, 1);
@@ -220,7 +219,7 @@ export const putReorderCardApi = (data: IReorderCardData) => {
 			const selectedIndex = newBoards.findIndex(
 				(board) => board.id === boardId,
 			);
-			if (selectedIndex < 0) reject('No board found');
+			if (selectedIndex < 0) reject(new Error('No board found'));
 			const selectedBoard = newBoards[selectedIndex];
 			const { cards = [] } = selectedBoard;
 			const [changeItem] = cards.splice(startIndex, 1);

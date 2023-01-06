@@ -1,6 +1,7 @@
 import { actionCreator, orchestrator } from 'satcheljs';
 import { putMoveCardApi } from 'api';
 import { saveBoardsAction } from 'store-board/mutator-actions';
+import { errorToastNotify } from 'utils';
 
 export const moveCardAction = actionCreator(
 	'MOVE_CARD',
@@ -16,7 +17,8 @@ orchestrator(moveCardAction, async (actionMessage) => {
 	try {
 		const newBoards = await putMoveCardApi(actionMessage);
 		saveBoardsAction(newBoards);
-	} catch (error) {
+	} catch (error: any) {
 		console.error(error);
+		errorToastNotify(error?.message || String(error));
 	}
 });
