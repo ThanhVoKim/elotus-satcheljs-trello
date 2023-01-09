@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { dispatch } from 'satcheljs';
 
 import { prefixClassBoardItem } from 'components/board-item';
-import { addBoardAction } from 'store-board/actions';
 
 import { IBoardCreateProps, IBoardCreateState } from './';
+import { addBoardAction } from 'store-board/actions';
+
 import './board-create.style.scss';
 
 export const prefixClassBoardCreate = 'board-create';
@@ -28,7 +28,7 @@ export class BoardItemCreate extends Component<
 	handleCreate = () => {
 		const { title = '' } = this.state;
 		if (!title) return;
-		dispatch(addBoardAction(title));
+		addBoardAction(title);
 		this.setState({ title: '' });
 	};
 

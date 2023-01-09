@@ -16,18 +16,17 @@ import {
 	moveCardAction,
 	reorderCardAction,
 } from 'store-board/actions';
-import { dispatch } from 'satcheljs';
-import { getBoardsAction } from 'store-board/actions/get-boards.action';
 import { BoardItemCreate } from 'components/board-create';
 import { getBoardsSelector } from 'store-board/selectors';
 import { DROPPABLE_BOARDS_TYPE } from 'constant';
+import { boardStore } from 'store-board';
 
 export const prefixClassBoard = 'board';
 
 @observer
 export class Home extends Component {
 	componentDidMount() {
-		dispatch(getBoardsAction());
+		boardStore.actions.getBoardsAction();
 	}
 
 	onDragEnd = (result: DropResult) => {
@@ -38,14 +37,14 @@ export class Home extends Component {
 		}
 
 		if (type === DROPPABLE_BOARDS_TYPE) {
-			dispatch(reorderBoardAction(source.index, destination.index));
+			reorderBoardAction(source.index, destination.index);
 		} else {
 			const sInd = source.droppableId;
 			const dInd = destination.droppableId;
 			if (sInd === dInd) {
-				dispatch(reorderCardAction(sInd, source.index, destination.index));
+				reorderCardAction(sInd, source.index, destination.index);
 			} else {
-				dispatch(moveCardAction(sInd, dInd, source.index, destination.index));
+				moveCardAction(sInd, dInd, source.index, destination.index);
 			}
 		}
 	};

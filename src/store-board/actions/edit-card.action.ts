@@ -1,6 +1,6 @@
-import { actionCreator } from 'satcheljs';
+import { action } from 'satcheljs';
 
-export const editCardAction = actionCreator(
+export const editCardAction = action(
 	'EDIT_CARD',
 	(boardId: string, id: string, title: string, content: string) => {
 		return {

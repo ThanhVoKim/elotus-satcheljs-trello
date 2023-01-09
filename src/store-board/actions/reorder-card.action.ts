@@ -1,6 +1,6 @@
-import { actionCreator } from 'satcheljs';
+import { action } from 'satcheljs';
 
-export const reorderCardAction = actionCreator(
+export const reorderCardAction = action(
 	'REORDER_CARD',
 	(boardId: string, startIndex: number, endIndex: number) => ({
 		boardId,

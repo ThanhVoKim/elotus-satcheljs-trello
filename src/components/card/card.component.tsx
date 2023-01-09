@@ -4,7 +4,6 @@ import { deleteCardAction, editCardAction } from 'store-board/actions';
 
 import './card.style.scss';
 import { ICardProps } from './index';
-import { dispatch } from 'satcheljs';
 import { CardEditDialog } from 'components/card-edit-dialog';
 import { Modal } from 'components/modal';
 
@@ -17,12 +16,12 @@ export const Card: React.FC<ICardProps> = (props) => {
 	const [isOpenDialog, setIsOpenDialog] = useState(false);
 
 	const handleEdit = (title: string, content: string) => {
-		dispatch(editCardAction(boardId, id, title, content));
+		editCardAction(boardId, id, title, content);
 		handleCloseDialog();
 	};
 
 	const handleDelete = () => {
-		dispatch(deleteCardAction(boardId, id));
+		deleteCardAction(boardId, id);
 	};
 
 	const handleCloseDialog = () => {

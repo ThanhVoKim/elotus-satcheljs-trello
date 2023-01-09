@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { dispatch } from 'satcheljs';
 import { addCardAction } from 'store-board/actions';
 import { ICardCreateProps, ICardCreateState } from '.';
 
@@ -24,7 +23,7 @@ export class CardCreate extends Component<ICardCreateProps, ICardCreateState> {
 		const { title = '', content = '' } = this.state;
 		const { boardId = '' } = this.props;
 		if (!title && !content) return;
-		dispatch(addCardAction(boardId, title, content));
+		addCardAction(boardId, title, content);
 		this.setState({ title: '', content: '' });
 	};
 

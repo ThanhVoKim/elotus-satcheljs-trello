@@ -3,7 +3,6 @@ import { Menu } from '@headlessui/react';
 
 import { BoardItemEditDialog } from 'components/board-item-edit-dialog';
 import { Modal } from 'components/modal';
-import { dispatch } from 'satcheljs';
 import { deleteBoardAction, editBoardAction } from 'store-board/actions';
 import { MoreVerticalIcon } from 'svg';
 
@@ -20,11 +19,11 @@ export const BoardItemButtonMore: React.FC<IBoardItemButtonMoreProps> = (
 	const [isOpenDialog, setIsOpenDialog] = useState(false);
 
 	const handleDeleteBoard = () => {
-		dispatch(deleteBoardAction(board.id!));
+		deleteBoardAction(board.id!);
 	};
 
 	const handleUpdateBoard = (title: string) => {
-		dispatch(editBoardAction(board.id!, title));
+		editBoardAction(board.id!, title);
 		handleCloseDialog();
 	};
 

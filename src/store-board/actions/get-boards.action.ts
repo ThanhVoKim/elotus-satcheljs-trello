@@ -1,3 +1,3 @@
-import { actionCreator } from 'satcheljs';
+import { action } from 'satcheljs';
 
-export const getBoardsAction = actionCreator('GET_BOARD');
+export const getBoardsAction = action('GET_BOARD');

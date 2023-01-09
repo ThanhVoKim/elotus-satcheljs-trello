@@ -1,6 +1,6 @@
-import { actionCreator } from 'satcheljs';
+import { action } from 'satcheljs';
 
-export const moveCardAction = actionCreator(
+export const moveCardAction = action(
 	'MOVE_CARD',
 	(
 		sourceBoardId: string,

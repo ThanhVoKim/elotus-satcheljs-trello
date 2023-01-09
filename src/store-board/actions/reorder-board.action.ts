@@ -1,5 +1,5 @@
-import { actionCreator } from 'satcheljs';
-export const reorderBoardAction = actionCreator(
+import { action } from 'satcheljs';
+export const reorderBoardAction = action(
 	'REORDER_BOARD',
 	(startIndex: number, endIndex: number) => ({
 		startIndex,

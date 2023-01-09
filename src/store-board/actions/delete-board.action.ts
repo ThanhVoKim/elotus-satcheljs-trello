@@ -1,6 +1,5 @@
-import { actionCreator } from 'satcheljs';
+import { action } from 'satcheljs';
 
-export const deleteBoardAction = actionCreator(
-	'DELETE_BOARD',
-	(id: string) => ({ id }),
-);
+export const deleteBoardAction = action('DELETE_BOARD', (id: string) => ({
+	id,
+}));
