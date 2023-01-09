@@ -1,16 +1,8 @@
-import { actionCreator, orchestrator } from 'satcheljs';
 import { putReorderCardApi } from 'api';
+import { orchestrator } from 'satcheljs';
+import { reorderCardAction } from 'store-board/actions';
 import { saveBoardsAction } from 'store-board/mutator-actions';
 import { errorToastNotify } from 'utils';
-
-export const reorderCardAction = actionCreator(
-	'REORDER_CARD',
-	(boardId: string, startIndex: number, endIndex: number) => ({
-		boardId,
-		startIndex,
-		endIndex,
-	}),
-);
 
 orchestrator(reorderCardAction, async (actionMessage) => {
 	try {

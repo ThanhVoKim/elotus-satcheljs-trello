@@ -1,4 +1,4 @@
-import { editCardAction } from 'store-board/actions/edit-card';
+import { editCardAction } from 'store-board/actions/edit-card.action';
 
 export interface ICard {
 	id?: string;

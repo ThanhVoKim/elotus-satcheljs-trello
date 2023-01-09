@@ -1,12 +1,8 @@
-import { deleteCardApi } from 'api';
-import { actionCreator, orchestrator } from 'satcheljs';
+import { orchestrator } from 'satcheljs';
 import { saveBoardsAction } from 'store-board/mutator-actions';
+import { deleteCardAction } from 'store-board/actions';
+import { deleteCardApi } from 'api';
 import { errorToastNotify } from 'utils';
-
-export const deleteCardAction = actionCreator(
-	'DELETE_CARD',
-	(boardId: string, cardId: string) => ({ boardId, cardId }),
-);
 
 orchestrator(deleteCardAction, async (actionMessage) => {
 	try {

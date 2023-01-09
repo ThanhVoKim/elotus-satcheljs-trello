@@ -1,17 +1,8 @@
-import { actionCreator, orchestrator } from 'satcheljs';
 import { putEditBoardsApi } from 'api';
+import { orchestrator } from 'satcheljs';
+import { editBoardAction } from 'store-board/actions';
 import { saveBoardsAction } from 'store-board/mutator-actions';
 import { errorToastNotify } from 'utils';
-
-export const editBoardAction = actionCreator(
-	'EDIT_BOARD',
-	(id: string, title: string) => {
-		return {
-			id,
-			title,
-		};
-	},
-);
 
 orchestrator(editBoardAction, async (actionMessage) => {
 	try {

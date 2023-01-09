@@ -1,17 +1,8 @@
-import { actionCreator, orchestrator } from 'satcheljs';
-import { putMoveCardApi } from 'api';
+import { orchestrator } from 'satcheljs';
 import { saveBoardsAction } from 'store-board/mutator-actions';
+import { moveCardAction } from 'store-board/actions';
+import { putMoveCardApi } from 'api';
 import { errorToastNotify } from 'utils';
-
-export const moveCardAction = actionCreator(
-	'MOVE_CARD',
-	(
-		sourceBoardId: string,
-		destinationBoardId: string,
-		startIndex: number,
-		endIndex: number,
-	) => ({ sourceBoardId, destinationBoardId, startIndex, endIndex }),
-);
 
 orchestrator(moveCardAction, async (actionMessage) => {
 	try {

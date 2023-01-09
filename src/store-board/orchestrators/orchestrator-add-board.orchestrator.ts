@@ -1,13 +1,12 @@
-import { getBoardsApi } from 'api';
-import { actionCreator, orchestrator } from 'satcheljs';
+import { postCreateBoardsApi } from 'api';
+import { orchestrator } from 'satcheljs';
+import { addBoardAction } from 'store-board/actions';
 import { saveBoardsAction } from 'store-board/mutator-actions';
 import { errorToastNotify } from 'utils';
 
-export const getBoardsAction = actionCreator('GET_BOARD');
-
-orchestrator(getBoardsAction, async () => {
+orchestrator(addBoardAction, async (actionMessage) => {
 	try {
-		const newBoards = await getBoardsApi();
+		const newBoards = await postCreateBoardsApi(actionMessage);
 		saveBoardsAction(newBoards);
 	} catch (error: any) {
 		console.error(error);

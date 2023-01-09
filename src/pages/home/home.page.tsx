@@ -17,7 +17,7 @@ import {
 	reorderCardAction,
 } from 'store-board/actions';
 import { dispatch } from 'satcheljs';
-import { getBoardsAction } from 'store-board/actions/get-boards';
+import { getBoardsAction } from 'store-board/actions/get-boards.action';
 import { BoardItemCreate } from 'components/board-create';
 import { getBoardsSelector } from 'store-board/selectors';
 import { DROPPABLE_BOARDS_TYPE } from 'constant';

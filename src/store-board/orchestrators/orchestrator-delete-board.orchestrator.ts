@@ -1,12 +1,8 @@
-import { actionCreator, orchestrator } from 'satcheljs';
+import { orchestrator } from 'satcheljs';
 import { deleteBoardsApi } from 'api';
+import { deleteBoardAction } from 'store-board/actions';
 import { saveBoardsAction } from 'store-board/mutator-actions';
 import { errorToastNotify } from 'utils';
-
-export const deleteBoardAction = actionCreator(
-	'DELETE_BOARD',
-	(id: string) => ({ id }),
-);
 
 orchestrator(deleteBoardAction, async (actionMessage) => {
 	try {
