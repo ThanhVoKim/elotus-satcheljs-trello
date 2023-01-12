@@ -1,0 +1,38 @@
+.navbar {
+	&__header {
+		background: rgba(black, 0.2);
+		color: var(--stone-900);
+		background-color: rgba(black, 0.15);
+		padding: 12px 0;
+		transition: all 0.3s ease-in-out;
+		margin: 0 0 15px 0;
+		&:hover {
+			background-color: var(--gray-50);
+			box-shadow: 1px 1px 5px 2px rgba(black, 0.15);
+		}
+	}
+
+	&__nav {
+	}
+
+	&__nav-list {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+	}
+
+	&__nav-item {
+		flex: 0 0 auto;
+	}
+
+	&__nav-link {
+		display: block;
+		padding: 7px 12px;
+		font-size: 14px;
+		font-weight: 500;
+		transition: all 0.3 ease-in-out;
+		&:hover {
+			color: var(--blue-600);
+		}
+	}
+}

@@ -1,0 +1,59 @@
+.card {
+	position: relative;
+	border-radius: 4px;
+
+	&:hover {
+		background-color: white;
+	}
+
+	&:hover &__title {
+		padding: 0 40px 0 0;
+	}
+
+	&__content {
+		padding: 10px 12px;
+	}
+
+	&__title {
+		font-weight: 700;
+		font-size: 14px;
+		margin: 0 0 4px 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	&__desc {
+		font-size: 13px;
+		word-break: break-all;
+	}
+
+	&__action {
+		position: absolute;
+		top: 5px;
+		right: 6px;
+		display: none;
+		align-items: center;
+		flex-flow: row nowrap;
+		gap: 5px;
+	}
+
+	&:hover &__action {
+		display: flex;
+	}
+
+	&__button-icon {
+		border-radius: 4px;
+		&:hover {
+			background-color: var(--gray-50);
+		}
+
+		&.delete:hover {
+			color: var(--red-600);
+		}
+
+		&.edit:hover {
+			color: var(--blue-600);
+		}
+	}
+}

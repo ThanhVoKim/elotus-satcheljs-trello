@@ -1,0 +1,18 @@
+{
+	"extends": "ts-config-single-spa",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"declarationDir": "dist",
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"baseUrl": "./",
+		"paths": {
+			"@root/*": ["../*"],
+			"graphql-compose": ["node_modules/graphql-compose/"]
+		}
+	},
+	"files": ["src/thanh-home-module.tsx"],
+	"include": ["src/**/*"],
+	"exclude": ["src/**/*.test*"]
+}
